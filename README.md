@@ -42,13 +42,58 @@ TinyDB เป็นระบบฐานข้อมูลขนาดเล็�
 from tinydb import TinyDB, Query
 db = TinyDB('db.json')
 User = Query()
-db.insert({'name': 'John', 'age': 22})
-db.search(User.name == 'John')
+db.insert({'type': 'apple', 'count': 7})
+db.insert({'type': 'peach', 'count': 3})
+db.all()
 ```
 output:
 ```
-[{'name': 'John', 'age': 22}]
+[{'count': 7, 'type': 'apple'}, {'count': 3, 'type': 'peach'}]
 ```
+```python
+for item in db:
+  print(item)
+ ```
+ Output:
+  ```
+{'count': 7, 'type': 'apple'}
+{'count': 3, 'type': 'peach'}
+   ```
+ ```python
+Fruit = Query()
+db.search(Fruit.type == 'peach')
+```
+```
+[{'count': 3, 'type': 'peach'}]
+```
+```python
+db.search(Fruit.count > 5)
+```
+```
+[{'count': 7, 'type': 'apple'}]
+ ```
+```python
+db.update({'count': 10}, Fruit.type == 'apple')
+db.all()
+```
+```
+[{'count': 10, 'type': 'apple'}, {'count': 3, 'type': 'peach'}]
+```
+```python
+db.remove(Fruit.count < 5)
+db.all()
+```
+```
+[{'count': 10, 'type': 'apple'}]
+```
+```python
+db.purge()
+db.all()
+```
+```
+[]
+```
+
 [Document:](https://tinydb.readthedocs.io/en/latest/index.html)
 
 
