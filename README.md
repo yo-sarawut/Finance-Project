@@ -25,6 +25,33 @@ pickle_in = open('dict.pickle', 'rb')
 example_dict = pickle.load(pickle_in)
 ```
 
+## TinyDB
+
+หากคุณเป็นนักพัฒนาภาษา Python และคุณต้องการสร้างโปรแกรมขนาดเล็กที่ต้องการฐานข้อมูลขนาดเล็ก แต่คุณไม่ต้องการใช้ SQLite ขอแนะนำให้รู้จัก Database ที่ชื่อ TinyDB
+
+TinyDB เป็นระบบฐานข้อมูลขนาดเล็กที่เขียนด้วยภาษา Python และเป็นฐานข้อมูลประเภท NoSQL แถมเป็น Document-Oriented Database (เก็บข้อมูลในรูปแบบเอกสารเดียวกัน) ไม่ต้องการไลบารีอื่นเพิ่มเติม เพราะเป็น pure Python
+
+- รองรับทั้ง Python 2.7 และ Python 3
+- ง่าย สะดวกและรวดเร็ว
+- ทำงานได้ทั้ง CPython และ PyPy
+
+[Source:](https://python3.wannaphong.com/2017/10/python-tinydb.html)
+
+### Basic Usage
+```python
+from tinydb import TinyDB, Query
+db = TinyDB('db.json')
+User = Query()
+db.insert({'name': 'John', 'age': 22})
+db.search(User.name == 'John')
+```
+output:
+```
+[{'name': 'John', 'age': 22}]
+```
+[Document:](https://tinydb.readthedocs.io/en/latest/index.html)
+
+
 ## Reading and writing HDF5 format files
 
 ### seed for replication
