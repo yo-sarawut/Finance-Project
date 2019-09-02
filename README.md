@@ -5,7 +5,85 @@
 - Explore Global Indexes
 
 
+### Example : Dash - search_bar
 
+```python
+import dash
+import dash_bootstrap_components as dbc
+import dash_html_components as html
+from dash.dependencies import Input, Output, State
+
+PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
+
+search_bar = dbc.Row(
+    [
+        dbc.Col(dbc.Input(type="search", placeholder="Search")),
+        dbc.Col(
+            dbc.Button("Search", color="primary", className="ml-2"),
+            width="auto",
+        ),
+    ],
+    no_gutters=True,
+    className="ml-auto flex-nowrap mt-3 mt-md-0",
+    align="center",
+)
+
+navbar = dbc.Navbar(
+    [
+        html.A(
+            # Use row and col to control vertical alignment of logo / brand
+            dbc.Row(
+                [
+                    dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
+                    dbc.Col(dbc.NavbarBrand("Navbar", className="ml-2")),
+                ],
+                align="center",
+                no_gutters=True,
+            ),
+            href="https://plot.ly",
+        ),
+        dbc.NavbarToggler(id="navbar-toggler"),
+        dbc.Collapse(search_bar, id="navbar-collapse", navbar=True),    
+    ],
+
+    color="dark",
+    dark=True,
+
+)
+```
+```python
+import dash
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+import dash_html_components as html
+
+jumbotron = dbc.Jumbotron(
+    [
+        html.H1("Jumbotron", className="display-3"),
+        html.P(
+            "Use a jumbotron to call attention to "
+            "featured content or information.",
+            className="lead",
+        ),
+        html.Hr(className="my-2"),
+        html.P(
+            "Jumbotrons use utility classes for typography and "
+            "spacing to suit the larger container."
+        ),
+        html.P(dbc.Button("Learn more", color="primary"), className="lead"),
+    ]
+)
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
+
+app.layout = html.Div([jumbotron,navbar,search_bar])
+
+
+
+if __name__ == "__main__":
+    app.run_server()
+
+```
 ## Reading and writing Pickle
 ```python
 import pickle 
